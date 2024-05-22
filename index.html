@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba de Maquetación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+  </head>
+  <body
+    class="bg-gray-200 flex items-center justify-center h-screen dark:bg-gray-900 dark:text-white"
+  >
+    <button
+      id="darkmode"
+      class="absolute top-4 right-4 px-4 py-2 bg-gray-800 text-white rounded"
+    >
+      <span id="darkModeIcon">🌙</span>
+    </button>
+    <!-- CARD COMPONENT -->
+    <div
+      class="mx-auto bg-white dark:bg-slate-600 p-8 rounded-lg drop-shadow shadow-lg flex flex-col items-center relative w-auto z-0"
+    >
+      <!-- ROW -->
+      <div class="flex flex-col md:flex-row items-center w-full gap-8">
+        <!-- PICTURE AND INFO -->
+        <div class="flex flex-col gap-4">
+          <img
+            src="resources/me.jpg"
+            alt="Picture of a person"
+            class="h-24 w-24 rounded-full -mt-20 ml-7 md:ml-0"
+          />
+          <div class="md:ml-4 text-center md:text-left">
+            <h2 class="text-xl font-semibold">Pablo Vázquez</h2>
+            <p class="text-gray-600 dark:text-gray-300">Web Developer</p>
+          </div>
+        </div>
+        <!-- Social Media Icons -->
+        <div class="md:ml-16 flex space-x-2 md:-mt-16">
+          <span
+            ><img src="icons/facebook.png" alt="Facebook icon" class="h-6"
+          /></span>
+          <span
+            ><img src="icons/twitter.png" alt="Twitter icon" class="h-6"
+          /></span>
+          <span
+            ><img src="icons/instagram.png" alt="Instagram icon" class="h-6"
+          /></span>
+        </div>
+      </div>
+
+      <!-- OPEN MODAL BUTTON -->
+      <button
+        id="open-modal"
+        class="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-all"
+      >
+        Open Modal
+      </button>
+    </div>
+
+    <!-- MODAL -->
+    <div
+      id="modal"
+      class="fixed inset-0 bg-black bg-opacity-50 p-8 md:p-0 dark:bg-opacity-80 flex items-center justify-center hidden"
+    >
+      <!-- MODAL CARD -->
+      <div
+        class="bg-white p-8 rounded-lg shadow-lg relative w-96 dark:bg-slate-600"
+      >
+        <button
+          id="close-modal"
+          class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+        >
+          &times;
+        </button>
+        <h2 class="text-xl font-semibold mb-4 dark:text-white">Modal Title</h2>
+        <iframe
+          src="resources/CV.pdf"
+          width="100%"
+          height="400px"
+          class="mt-4"
+        ></iframe>
+        <p class="mt-4 dark:text-gray-300">
+          Trouble viewing this PDF? Click here to
+          <a
+            href="resources/CV.pdf"
+            class="text-blue-500 dark:text-blue-300 underline"
+            >download it</a
+          >.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Función para abrir el modal con click
+      document
+        .getElementById("open-modal")
+        .addEventListener("click", function () {
+          document.getElementById("modal").classList.remove("hidden");
+        });
+
+      // Función para cerrar el modal con click
+      document
+        .getElementById("close-modal")
+        .addEventListener("click", function () {
+          document.getElementById("modal").classList.add("hidden");
+        });
+
+      // Event listener que cierra el modal al presionarse fuera
+      document
+        .getElementById("modal")
+        .addEventListener("click", function (event) {
+          if (event.target === document.getElementById("modal")) {
+            document.getElementById("modal").classList.add("hidden");
+          }
+        });
+
+      // Función que cierra el modal al presionar escape
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          document.getElementById("modal").classList.add("hidden");
+        }
+      });
+
+      // Función que cambia el dark y light mode
+      document
+        .getElementById("darkmode")
+        .addEventListener("click", function () {
+          document.documentElement.classList.toggle("dark");
+          const darkModeIcon = document.getElementById("darkModeIcon");
+          if (document.documentElement.classList.contains("dark")) {
+            darkModeIcon.textContent = "🌞";
+          } else {
+            darkModeIcon.textContent = "🌙";
+          }
+        });
+    </script>
+  </body>
+</html>
